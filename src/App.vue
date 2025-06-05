@@ -26,6 +26,10 @@ const store = usePricesStore()
   --bg-color: rgb(12, 12, 12);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--bg-color);
   color: white;
@@ -53,11 +57,17 @@ button:focus-visible {
   background-color: rgba(70, 70, 70, 0.664);
   transition: background-color 0.3s ease-in-out;
 }
+
+@media screen and (max-width: 796px) {
+  .line-item label {
+    display: block;
+  }
+}
 </style>
 
 <style scoped>
 .table {
-  margin: 10rem auto;
+  margin: 5rem auto;
   max-width: max-content;
 }
 .button-container {

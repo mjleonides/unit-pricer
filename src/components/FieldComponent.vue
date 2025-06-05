@@ -1,6 +1,6 @@
 <template>
   <div class="field">
-    <label class="label" :for="id">{{ label }}</label>
+    <label class="label" :for="id" :class="{ 'label--show': showLabel }">{{ label }}</label>
     <div class="input-container">
       <span v-if="prefix" class="prefix">{{ prefix }}</span
       ><input
@@ -10,6 +10,7 @@
         :placeholder="placeholder"
         v-model="value"
         :readonly="readonly"
+        :inputmode="inputmode"
       />
     </div>
   </div>
@@ -27,6 +28,8 @@ interface Props {
   modelValue?: any
   prefix?: string
   readonly?: boolean
+  inputmode?: any
+  showLabel?: boolean
 }
 
 // interface PropsText {
@@ -63,6 +66,7 @@ const value = computed({
 .field {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .input-container {
@@ -81,6 +85,8 @@ input {
   padding: 0.75rem 0.5rem;
   font-size: 1rem;
   min-height: 1.25rem;
+
+  width: 100%;
 }
 
 .prefix {
@@ -103,6 +109,10 @@ label {
   display: none;
   margin-bottom: 0.25rem;
   font-size: 0.75rem;
+}
+
+.label--show {
+  display: block;
 }
 
 .prefix {

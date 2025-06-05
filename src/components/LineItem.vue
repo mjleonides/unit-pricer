@@ -1,16 +1,6 @@
 <template>
   <div class="line-item">
     <div class="row">
-      <div class="button-container">
-        <button
-          v-if="store.priceCount > 1"
-          id="remove-button"
-          title="Remove line"
-          @click="emit('onRemove')"
-        >
-          x
-        </button>
-      </div>
       <FieldComponent
         :id="`row-${price.key}-name`"
         name="name"
@@ -20,6 +10,8 @@
         :model-value="price.name"
         @update:model-value="(newValue) => store.updatePrice(price.key, 'name', newValue)"
       />
+    </div>
+    <div class="row">
       <FieldComponent
         :id="`row-${price.key}-cost`"
         class="small-field"
@@ -29,6 +21,7 @@
         placeholder="123.45"
         :model-value="price.cost"
         prefix="$"
+        inputmode="decimal"
         @update:model-value="(newValue) => store.updatePrice(price.key, 'cost', newValue)"
       />
       <FieldComponent
@@ -38,35 +31,40 @@
         label="Quantity"
         type="number"
         placeholder="10"
+        inputmode="numeric"
         :model-value="price.quantity"
         @update:model-value="(newValue) => store.updatePrice(price.key, 'quantity', newValue)"
       />
-    </div>
-    <div class="row">
       <FieldComponent
         :id="`row-${price.key}-unit`"
         class="small-field"
         name="unit"
         label="Unit"
         type="text"
-        placeholder="beans"
+        placeholder="Bean"
         :model-value="price.unit"
         @update:model-value="(newValue) => store.updatePrice(price.key, 'unit', newValue)"
       />
+    </div>
+    <div class="row">
       <div class="result-container">
         <span class="fill">=</span>
         <FieldComponent
           :id="`row-${price.key}-result`"
           name="result"
           class="small-field result"
-          label="Unit Price"
+          :label="price.unit ? `Per ${price.unit}` : ' '"
           type="text"
           readonly
           :modelValue="unitPriceDisplay"
           prefix="$"
+          show-label
         />
-        <span v-if="price.unit" class="fill">{{ price.unit }}</span>
+        <!-- <span v-if="price.unit" class="fill">{{ price.unit }}</span> -->
       </div>
+    </div>
+    <div v-if="store.priceCount > 1" class="button-container">
+      <button id="remove-button" title="Remove line" @click="emit('onRemove')">Remove</button>
     </div>
   </div>
 </template>
@@ -109,21 +107,17 @@ const unitPriceDisplay = computed(() => {
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: end;
+  align-items: flex-end;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
 }
 
-@media screen and (max-width: 796px) {
-  .line-item {
-    flex-direction: column;
-  }
+.line-item {
+  margin-bottom: 1rem;
 }
 
 :deep(.small-field input) {
   text-align: right;
-  max-width: 4rem;
+  max-width: 6.5rem;
 }
 
 :deep(.small-field label) {
@@ -132,7 +126,6 @@ const unitPriceDisplay = computed(() => {
 
 .result-container {
   color: grey;
-  min-width: 15rem;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -145,9 +138,7 @@ const unitPriceDisplay = computed(() => {
 
 .button-container {
   margin-bottom: 0.5rem;
-  min-width: 2rem;
 }
-
 .result {
   color: white;
 }
@@ -157,5 +148,24 @@ const unitPriceDisplay = computed(() => {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+@media screen and (max-width: 796px) {
+  .line-item {
+    flex-direction: column;
+    border: solid 1px rgba(128, 128, 128, 0.437);
+    border-radius: 8px;
+    padding: 1rem;
+    align-items: center;
+  }
+
+  .row {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .button-container {
+    margin-bottom: -0.5rem;
+  }
 }
 </style>
