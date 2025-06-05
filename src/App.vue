@@ -2,7 +2,6 @@
   <div class="table">
     <LineItem
       v-for="price in store.prices"
-      :row="price.key"
       :price="price"
       :key="price.key"
       @on-remove="store.removePrice(price.key)"
@@ -37,10 +36,6 @@ body {
   padding: 0;
 }
 
-.line-item:first-of-type label {
-  display: block;
-}
-
 button {
   background-color: var(--bg-color);
   color: rgb(209, 209, 209);
@@ -56,6 +51,10 @@ button:hover,
 button:focus-visible {
   background-color: rgba(70, 70, 70, 0.664);
   transition: background-color 0.3s ease-in-out;
+}
+
+.line-item:first-of-type label {
+  display: block;
 }
 
 @media screen and (max-width: 796px) {

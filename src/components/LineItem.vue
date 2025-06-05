@@ -53,14 +53,13 @@
           :id="`row-${price.key}-result`"
           name="result"
           class="small-field result"
-          :label="price.unit ? `Per ${price.unit}` : ' '"
+          :label="price.unit ? `Per ${price.unit}` : ''"
           type="text"
           readonly
           :modelValue="unitPriceDisplay"
           prefix="$"
           show-label
         />
-        <!-- <span v-if="price.unit" class="fill">{{ price.unit }}</span> -->
       </div>
     </div>
     <div v-if="store.priceCount > 1" class="button-container">

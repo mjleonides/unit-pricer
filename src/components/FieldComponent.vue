@@ -28,24 +28,9 @@ interface Props {
   modelValue?: any
   prefix?: string
   readonly?: boolean
-  inputmode?: any
+  inputmode?: 'decimal' | 'numberic'
   showLabel?: boolean
 }
-
-// interface PropsText {
-//   modelValue?: 'text'
-// }
-// interface PropsNumber{
-//   modelValue?: 'number'
-// }
-
-// type Props<T extends PropsText | PropsNumber> = T extends 'text' ? PropsText : PropsNumber
-
-// type NameOrId<T extends number | string> = T extends number
-//   ? IdLabel
-//   : NameLabel;
-
-// <T extends number | string>(idOrName: T): NameOrId<T>
 
 const props = defineProps<Props>()
 
@@ -124,7 +109,8 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   display: none;
 }
-/* input[type='number'] {
+input[type='number'] {
   -moz-appearance: textfield;
-} */
+  appearance: textfield;
+}
 </style>
