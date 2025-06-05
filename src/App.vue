@@ -9,7 +9,7 @@
     />
 
     <div class="button-container">
-      <button @click="store.addPrice">Add Comparison</button>
+      <button @click="store.addPrice">+ Add Comparison</button>
       <button @click="store.clear">Clear</button>
     </div>
   </div>
@@ -22,43 +22,48 @@ const store = usePricesStore()
 </script>
 
 <style>
+:root {
+  --bg-color: rgb(12, 12, 12);
+}
+
 body {
-  background-color: black;
+  background-color: var(--bg-color);
   color: white;
   font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-.table {
-  margin: 0 auto;
-  max-width: max-content;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center; */
+  padding: 0;
 }
 
 .line-item:first-of-type label {
   display: block;
 }
 
-.button-container {
-  margin: 0.5rem 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
 button {
-  background-color: black;
-  color: grey;
-  border: solid 1px rgb(84, 84, 84);
-  border-radius: 4px;
-  margin: 0 0.5rem;
+  background-color: var(--bg-color);
+  color: rgb(209, 209, 209);
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
 }
 
 button:hover,
 button:focus-visible {
-  background-color: rgb(84, 84, 84);
-  color: white;
+  background-color: rgba(70, 70, 70, 0.664);
+  transition: background-color 0.3s ease-in-out;
+}
+</style>
+
+<style scoped>
+.table {
+  margin: 10rem auto;
+  max-width: max-content;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
 }
 </style>

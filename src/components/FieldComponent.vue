@@ -3,7 +3,14 @@
     <label class="label" :for="id">{{ label }}</label>
     <div class="input-container">
       <span v-if="prefix" class="prefix">{{ prefix }}</span
-      ><input :id="id" :type="type" :name="name" :placeholder="placeholder" v-model="value" />
+      ><input
+        :id="id"
+        :type="type"
+        :name="name"
+        :placeholder="placeholder"
+        v-model="value"
+        :readonly="readonly"
+      />
     </div>
   </div>
 </template>
@@ -19,6 +26,7 @@ interface Props {
   type: 'text' | 'number'
   modelValue?: any
   prefix?: string
+  readonly?: boolean
 }
 
 // interface PropsText {
@@ -53,7 +61,6 @@ const value = computed({
 
 <style scoped>
 .field {
-  margin: 0.5rem 0.25rem;
   display: flex;
   flex-direction: column;
 }
@@ -72,8 +79,8 @@ input {
   color: white;
   border-radius: 8px;
   padding: 0.75rem 0.5rem;
-  max-width: 100%;
   font-size: 1rem;
+  min-height: 1.25rem;
 }
 
 .prefix {
