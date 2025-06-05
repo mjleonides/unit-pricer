@@ -1,37 +1,115 @@
 <template>
   <div class="line-item">
-    <FieldComponent name="name" label="Name" type="text" placeholder="Item name" />
-    <FieldComponent name="cost" label="Cost" type="number" placeholder="$123.45" v-model="cost" />
     <FieldComponent
-      name="qty"
+      :id="`row-${price.key}-name`"
+      name="name"
+      label="Name"
+      type="text"
+      placeholder="Beans"
+      :model-value="price.name"
+      @update:model-value="(newValue) => updatePrice(price.key, 'name', newValue)"
+    />
+    <FieldComponent
+      :id="`row-${price.key}-cost`"
+      class="small-field"
+      name="cost"
+      label="Cost"
+      type="number"
+      placeholder="123.45"
+      :model-value="price.cost"
+      prefix="$"
+      @update:model-value="(newValue) => updatePrice(price.key, 'cost', newValue)"
+    />
+    <FieldComponent
+      :id="`row-${price.key}-qty`"
+      class="small-field"
+      name="quantity"
       label="Quantity"
       type="number"
-      placeholder="qty"
-      v-model="quantity"
+      placeholder="10"
+      :model-value="price.quantity"
+      @update:model-value="(newValue) => updatePrice(price.key, 'quantity', newValue)"
     />
-    <FieldComponent name="unit" label="Unit" type="text" placeholder="qty" v-model="unit" />
-    <div>
-      <span>=</span>{{ `$${unitPrice}` }}<span v-if="unit"> / {{ unit }}</span>
+    <FieldComponent
+      :id="`row-${price.key}-unit`"
+      class="small-field"
+      name="unit"
+      label="Unit"
+      type="text"
+      placeholder="beans"
+      :model-value="price.unit"
+      @update:model-value="(newValue) => updatePrice(price.key, 'unit', newValue)"
+    />
+    <div class="result-container">
+      <span> = </span><span class="result">{{ `$${unitPriceDisplay}` }}</span
+      ><span class="unit" v-if="price.unit"> / {{ price.unit }}</span>
+      <button
+        v-if="priceCount > 1"
+        id="remove-button"
+        title="Remove line"
+        @click="emit('onRemove')"
+      >
+        x
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import FieldComponent from '@/components/FieldComponent.vue'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import type { Price } from '@/types'
+import { usePricesStore } from '@/store'
 
-const cost = ref<number>()
-const quantity = ref<number>()
-const unit = ref<string>()
+const props = defineProps<{
+  price: Price
+}>()
+
+const emit = defineEmits(['onRemove'])
+
+const { updatePrice, priceCount } = usePricesStore()
 
 const unitPrice = computed(() =>
-  cost.value && quantity.value ? `${(cost.value / quantity.value).toFixed(3)}` : '',
+  props.price.cost && props.price.quantity ? props.price.cost / props.price.quantity : undefined,
 )
+
+const unitPriceDisplay = computed(() => {
+  if (unitPrice.value) {
+    const fixedUnitPrice = unitPrice.value.toFixed(3).toString()
+
+    if (fixedUnitPrice.endsWith('0')) {
+      return unitPrice.value.toFixed(2)
+    } else {
+      return fixedUnitPrice
+    }
+  }
+
+  return ''
+})
 </script>
 
 <style scoped>
 .line-item {
   display: flex;
   flex-direction: row;
+  align-items: end;
+}
+
+:deep(.small-field input) {
+  max-width: 4rem;
+  text-align: right;
+}
+
+:deep(.small-field label) {
+  text-align: right;
+}
+
+.result-container {
+  margin-bottom: 1.125rem;
+  color: grey;
+}
+
+.result {
+  color: white;
 }
 </style>
