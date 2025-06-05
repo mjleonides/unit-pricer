@@ -7,7 +7,7 @@
       type="text"
       placeholder="Beans"
       :model-value="price.name"
-      @update:model-value="(newValue) => updatePrice(price.key, 'name', newValue)"
+      @update:model-value="(newValue) => store.updatePrice(price.key, 'name', newValue)"
     />
     <FieldComponent
       :id="`row-${price.key}-cost`"
@@ -18,7 +18,7 @@
       placeholder="123.45"
       :model-value="price.cost"
       prefix="$"
-      @update:model-value="(newValue) => updatePrice(price.key, 'cost', newValue)"
+      @update:model-value="(newValue) => store.updatePrice(price.key, 'cost', newValue)"
     />
     <FieldComponent
       :id="`row-${price.key}-qty`"
@@ -28,7 +28,7 @@
       type="number"
       placeholder="10"
       :model-value="price.quantity"
-      @update:model-value="(newValue) => updatePrice(price.key, 'quantity', newValue)"
+      @update:model-value="(newValue) => store.updatePrice(price.key, 'quantity', newValue)"
     />
     <FieldComponent
       :id="`row-${price.key}-unit`"
@@ -38,13 +38,13 @@
       type="text"
       placeholder="beans"
       :model-value="price.unit"
-      @update:model-value="(newValue) => updatePrice(price.key, 'unit', newValue)"
+      @update:model-value="(newValue) => store.updatePrice(price.key, 'unit', newValue)"
     />
     <div class="result-container">
       <span> = </span><span class="result">{{ `$${unitPriceDisplay}` }}</span
       ><span class="unit" v-if="price.unit"> / {{ price.unit }}</span>
       <button
-        v-if="priceCount > 1"
+        v-if="store.priceCount > 1"
         id="remove-button"
         title="Remove line"
         @click="emit('onRemove')"
@@ -67,7 +67,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['onRemove'])
 
-const { updatePrice, priceCount } = usePricesStore()
+const store = usePricesStore()
 
 const unitPrice = computed(() =>
   props.price.cost && props.price.quantity ? props.price.cost / props.price.quantity : undefined,
