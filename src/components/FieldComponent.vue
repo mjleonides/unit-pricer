@@ -28,7 +28,7 @@ interface Props {
   modelValue?: any
   prefix?: string
   readonly?: boolean
-  inputmode?: 'decimal' | 'numberic'
+  inputmode?: 'decimal' | 'numeric'
   showLabel?: boolean
 }
 

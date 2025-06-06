@@ -39,7 +39,8 @@ export const usePricesStore = defineStore('store', {
       this.prices.splice(index, 1)
       this.removedPriceCount++
     },
-    updatePrice(key: number, field: string, newValue: string | number) {
+    // This typing allows field and newValue types to coordinate, making ts happy
+    updatePrice<K extends keyof Price>(key: number, field: K, newValue: Price[K]) {
       const index = this.prices.findIndex((x: Price) => x.key === key)
 
       const relevantPrice = this.prices[index]
