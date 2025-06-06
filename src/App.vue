@@ -11,7 +11,7 @@ import FooterComponent from '@/components/FooterComponent.vue'
 
 <style>
 :root {
-  --bg-color: rgb(12, 12, 12);
+  --bg-color: rgb(0, 0, 0);
 }
 
 * {
@@ -23,6 +23,7 @@ body {
   color: white;
   font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 0;
+  margin: 0;
 }
 
 .layout {
@@ -46,7 +47,7 @@ button {
 
 button:hover,
 button:focus-visible {
-  background-color: rgba(68, 26, 26, 0.664);
+  background-color: rgba(70, 70, 70, 0.664);
   transition: background-color 0.3s ease-in-out;
 }
 
