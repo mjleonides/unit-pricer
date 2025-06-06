@@ -11,3 +11,4 @@ It’s designed to quickly calculate the best unit price when comparing multiple
 - Calculate unit price from cost and quantity
 - Label and compare multiple prices at a glance
 - Inserted prices survive browser refresh and closed window/tab
+- Offline mode (Progressive Web App)
