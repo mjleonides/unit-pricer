@@ -1,23 +1,12 @@
 <template>
-  <div class="table">
-    <LineItem
-      v-for="price in store.prices"
-      :price="price"
-      :key="price.key"
-      @on-remove="store.removePrice(price.key)"
-    />
-
-    <div class="button-container">
-      <button @click="store.addPrice">+ Add Comparison</button>
-      <button @click="store.clear">Clear</button>
-    </div>
+  <div class="layout">
+    <TableComponent />
+    <FooterComponent />
   </div>
 </template>
 <script setup lang="ts">
-import LineItem from '@/components/LineItem.vue'
-import { usePricesStore } from '@/store'
-
-const store = usePricesStore()
+import TableComponent from '@/components/TableComponent.vue'
+import FooterComponent from '@/components/FooterComponent.vue'
 </script>
 
 <style>
@@ -36,6 +25,14 @@ body {
   padding: 0;
 }
 
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  align-items: center;
+}
+
 button {
   background-color: var(--bg-color);
   color: rgb(209, 209, 209);
@@ -49,7 +46,7 @@ button {
 
 button:hover,
 button:focus-visible {
-  background-color: rgba(70, 70, 70, 0.664);
+  background-color: rgba(68, 26, 26, 0.664);
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -61,18 +58,5 @@ button:focus-visible {
   .line-item label {
     display: block;
   }
-}
-</style>
-
-<style scoped>
-.table {
-  margin: 5rem auto;
-  max-width: max-content;
-}
-.button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 0.5rem;
 }
 </style>
