@@ -1,4 +1,4 @@
-# unit-pricer
+# Unit Pricer
 
 Calculating the best unit price while shopping online can be surprisingly time-consuming.
 
