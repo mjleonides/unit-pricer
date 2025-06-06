@@ -1,39 +1,7 @@
-# .
+# unit-pricer
 
-This template should help get you started developing with Vue 3 in Vite.
+Calculating the best unit price while shopping online can be surprisingly time-consuming.
 
-## Recommended IDE Setup
+I was frustrated with the hassle of manually calculating prices per ounce or item, so I created this tool.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+It’s designed to quickly calculate the best unit price when comparing multiple products, saving you a few seconds and helping you make a smarter purchase.
