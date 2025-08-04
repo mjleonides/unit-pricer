@@ -31,7 +31,7 @@
         label="Quantity"
         type="number"
         placeholder="10"
-        inputmode="numeric"
+        inputmode="decimal"
         :model-value="price.quantity"
         @update:model-value="(newValue) => store.updatePrice(price.key, 'quantity', newValue)"
       />
@@ -138,6 +138,7 @@ const unitPriceDisplay = computed(() => {
 .button-container {
   margin-bottom: 0.5rem;
 }
+
 .result {
   color: white;
 }
